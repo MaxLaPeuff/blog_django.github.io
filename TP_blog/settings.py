@@ -10,8 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+
 from pathlib import Path
+from .infos import*
 import os
+
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text=force_str
+
+
+EMAIL_USE_TLS=EMAIL_USE_TLS
+EMAIL_HOST=EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD
+EMAIL_PORT=EMAIL_PORT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +39,8 @@ SECRET_KEY = 'django-insecure-=gtq^id&k_0cx6nfbqiy&e00wjzbe7n4z8^wfb)%_=3r+geoe0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -39,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sslserver',
 ]
 
 MIDDLEWARE = [

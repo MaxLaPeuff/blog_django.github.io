@@ -1,0 +1,35 @@
+
+{% extends "portail.html" %}
+
+{% load static  %}
+
+
+{% block content %}
+
+{% for message in messages %}
+
+<strong>{{message}}</strong>
+
+{% endfor %}
+
+
+{% if user.is_authenticated %}
+
+<h3> Bonjour {{firstname}}, bienvenu sur notre blog   </h3>
+<button type="submit"> <a href="/logout">Se déconnecter </a> </button>
+
+{% else %}
+<div class="square">
+		<div class="login">
+
+			<div class="links">
+				<button type="submit"> <a href="/register">S'enregistrer</a> </button>
+				<button type="submit"> <a href="/login">Se connecter</a> </button>
+
+			</div>
+		</div>
+</div>
+
+{% endif %}
+
+{% endblock %}

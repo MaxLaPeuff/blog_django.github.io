@@ -1,0 +1,66 @@
+{% extends "portail.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h4>S'enregistrer ici</h4>
+
+{% for message in messages %}
+
+<strong>{{ message }}</strong>
+
+{% endfor  %}
+
+
+<form method="post" action="/register">
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="username"></label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Votre nom d'utilisateur " required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="firstname"></label>
+            <input type="text" name="firstname" id="firstname" placeholder="Votre nom" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="lastname"></label>
+            <input type="text" name="lastname" id="lastname" placeholder="Votre prenom " class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="email"></label>
+            <input type="email" name="email" id="email" placeholder="Votre adresse email  " class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="password"></label>
+            <input type="password" name="password" id="password" placeholder="Votre mot de passe " class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="password1"></label>
+            <input type="password" name="password1" id="password1" placeholder="Confirmer votre mot de passe " class="form-control" required>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> S'inscrire</button>
+
+</form>
+
+
+{% endblock %}

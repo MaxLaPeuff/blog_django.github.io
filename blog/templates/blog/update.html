@@ -1,7 +1,8 @@
 {% extends 'blog/base.html'%}
 
 {% block content %}
-    <div class="col-md-7 mx-auto text-center">
+
+<div class="col-md-7 mx-auto text-center">
         <h1>{{ article.title }}</h1>
         <small> {{ article.date_added }} </small>
         <strong>{{ article.intro }}</strong>
@@ -17,17 +18,15 @@
     {% empty %}
              <p>Pas de commentaire</p> 
         </article>    
-     {% endfor %}    
+    {% endfor %}    
                
         
     
-    <h3 class="mx-5">Ajouter un nouveau commentaire</h3>
-    <form class="form-control form-comtrol-lg" action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn text-white bg-success">commenter</button>
-    </form>
-
-</div>
+<h3 class="mx-5">Ajouter un nouveau commentaire</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Commenter</button>
+</form>
 
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "portail.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Se connecter ici</h2>
+
+{% for message in messages %}
+
+<strong>{{message}}</strong>
+
+{% endfor %}
+
+
+<form method="post" action="/login">
+    {% csrf_token %}
+            <br> <br>
+			<div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="username"></label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Votre nom d'utilisateur " required>
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="password"></label>
+                    <input type="password" name="password" id="password" placeholder="Votre mot de passe" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary"> Se connecter</button>
+            
+
+</form>
+
+
+{% endblock %}
