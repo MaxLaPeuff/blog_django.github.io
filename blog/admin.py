@@ -6,7 +6,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display=('title','intro','slug','date_created')
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display =('body','email','date_added')
+    list_display =('body' ,'user_comment','date_added')
 
 admin.site.register(CreateBlog,BlogAdmin)
 admin.site.register(Comment,CommentAdmin)

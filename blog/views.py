@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from django.views.generic import ListView
 from .models import CreateBlog, Comment
 from .forms import BlogForm
@@ -22,24 +22,29 @@ class List(ListView):
 
 @login_required
 
-def detailView(request,slug):
-    post=CreateBlog.objects.get(slug=slug)
-    comments=post.comments.all()
-    if request.method=='POST':
-        form=BlogForm(request.POST)
+def detailView(request, slug):
+    post = get_object_or_404(CreateBlog, slug=slug)
+    comments = post.comments.all()
+
+    if request.method == 'POST':
+        form = BlogForm(request.POST) 
         if form.is_valid():
-            form.save(commit=False)
-            form.instance.post=post
-            form.save()
-            return redirect('detailView',slug=post.slug)
+            # Créez une nouvelle instance de commentaire sans l'enregistrer immédiatement
+            new_comment = form.save(commit=False)
+            # Définir le post et l'utilisateur (à partir de la session d'authentification)
+            new_comment.post = post
+            new_comment.user_comment = request.user 
+            new_comment.save()  # Enregistrez le commentaire
+            return redirect('detailView', slug=post.slug)
     else:
-        form=BlogForm
-    content={
-        'article':post,
-        'comments':comments,
-        'form':form,
+        form = BlogForm()
+
+    content = {
+        'article': post,
+        'comments': comments,
+        'form': form,
     }
-    return render(request,'blog/update.html',content)
+    return render(request, 'blog/update.html', content)
 
 def maison(request):
     return render(request, 'blog/acceuil.html')
@@ -149,3 +154,4 @@ def activate(request , uidb64, token):
     else:
         messages.error(request, "L'activation a échoué, veuillez réessayer !!")
         return redirect('maison')
+    
